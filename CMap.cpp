@@ -11,6 +11,9 @@ CMap::CMap(int capacity){
 	/*for(int i=0;i<m_iCapacity*m_iCapacity;i++){
 		m_pMatrix[i]=0;
 	}*/
+
+	m_pEdge=new Edge[m_iCapacity-1];
+
 }
 CMap::~CMap(){
 	delete []m_pNodeArray;
@@ -123,4 +126,80 @@ void CMap::breadthFirstTraverseImpl(vector<int> preVec){
 	else{
 		breadthFirstTraverseImpl(curVec);
 	}
+}
+
+//PrimTree
+void CMap::primTree(int nodeIndex){
+	int value=0;
+	int edgeCount=0;
+	vector<int> nodeVec;
+	vector<Edge> edgeVec;
+
+	cout<<m_pNodeArray[nodeIndex].m_cData<<endl;
+
+	nodeVec.push_back(nodeIndex);
+	m_pNodeArray[nodeIndex].m_bIsVisited=true;//标志为已访问
+	//
+	while(edgeCount<m_iCapacity-1){
+		int temp=nodeVec.back();//取最尾部元素
+		for(int i=0;i<m_iCapacity;i++){
+			getValueFromMatrix(temp,i,value);
+			if(value==0){
+				continue;
+			}
+			else{
+				if(m_pNodeArray[i].m_bIsVisited)
+					{continue;}
+				else{
+					Edge edge(temp,i,value);
+					edgeVec.push_back(edge);
+				}
+			}
+
+		}
+		//从可选边集合中找出最小边
+		int edgeIndex=getMinEdge(edgeVec);
+		edgeVec[edgeIndex].m_bSelected=true;
+
+		cout<<edgeVec[edgeIndex].m_iNodeIndexA<<"————"<<edgeVec[edgeIndex].m_iNodeIndexB<<" ";
+		cout<<edgeVec[edgeIndex].m_iWeightValue<<endl;
+
+		m_pEdge[edgeCount]=edgeVec[edgeIndex];
+		edgeCount++;
+
+		int nextNodeIndex=edgeVec[edgeIndex].m_iNodeIndexB;
+		nodeVec.push_back(nextNodeIndex);
+		m_pNodeArray[nextNodeIndex].m_bIsVisited=true;
+		cout<<m_pNodeArray[nextNodeIndex].m_cData<<endl;
+	}
+}
+
+int CMap::getMinEdge(vector<Edge> edgeVec){
+	int minWeight=0;
+	int edgeIndex=0;
+	for(int i=0;i<edgeVec.size();i++){
+		if(!edgeVec[i].m_bSelected){
+			minWeight=edgeVec[i].m_iWeightValue;
+			edgeIndex=i;
+			break;//找到一个未被选中的边即跳出
+		}
+
+	}
+	if(minWeight==0){
+		return -1;
+	}
+	for(int i=0;i<edgeVec.size();i++){
+		if(!edgeVec[i].m_bSelected){
+			if(minWeight>edgeVec[i].m_iWeightValue){
+				minWeight=edgeVec[i].m_iWeightValue;
+				edgeIndex=i;
+			}
+		}
+		else{
+			continue;
+		}
+
+	}
+	return edgeIndex;
+		
 }

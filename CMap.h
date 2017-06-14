@@ -20,10 +20,14 @@ public:
 	void breadFirstTraverse(int nodeIndex);//广度优先
 
 	void primTree(int nodeIndex);//普里姆生成树
+	void kruskalTree();//克鲁斯卡尔生成树
 private:
 	bool getValueFromMatrix(int row,int col,int &value);
 	void breadthFirstTraverseImpl(vector<int> preVec);
 	int getMinEdge(vector<Edge> edgeVec);
+
+	bool isInset(vector<int> nodeSets,int target);//判断点是否在集合中
+	void mergeNodeSet(vector<int> &nodeSetA,vector<int> nodeSetB);//合并两个顶点集合
 private:
 	int m_iCapacity;
 	int m_iNodeCount;

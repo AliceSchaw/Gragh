@@ -10,6 +10,16 @@ using namespace std;
 C  F G——H
  \/
   E
+
+   A B C D E F G H
+ A 0 1 0 1 0 0 0 0
+ B 1 0 1 0 0 1 0 0
+ C 0 1 0 0 1 0 0 0
+ D 1 0 0 0 0 0 1 1
+ E 0 0 1 0 0 1 0 0
+ F 0 1 0 0 1 0 0 0 
+ G 0 0 0 1 0 0 0 1
+ H 0 0 0 1 0 0 1 0 
 */
 
 /*最小生成树
@@ -65,7 +75,7 @@ int main(void){
 	pMap->resetNode();
 	pMap->breadthFirstTraverse(0);
 	*/
-	//primTree
+
 	CMap *pMap=new CMap(6);
 	Node *pNodeA=new Node('A');	
 	Node *pNodeA=new Node('B');
@@ -92,8 +102,10 @@ int main(void){
 	pMap->setValueToMatrixForUndirectedGragh(3,5,4);
 	pMap->setValueToMatrixForUndirectedGragh(3,4,2);
 	pMap->setValueToMatrixForUndirectedGragh(4,5,9);
-
-	pMap->primTree(0);
+	//primTree
+	//pMap->primTree(0);
+	//kruskalTree
+	pMap->kruskalTree();
 	cout<<endl;
 
 

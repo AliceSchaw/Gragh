@@ -1,6 +1,8 @@
+#include "CMap.h"
 #include <iostream>
 #include <stdlib.h>
-#include "CMap.h"
+
+
 using namespace std;
 /*图的存储与遍历
 	A
@@ -37,16 +39,16 @@ E-F 9
 */
 int main(void){
 	//显示及遍历
-	/*
-	CMap *pMap=new CMap(8);
+	
+	/*CMap *pMap=new CMap(8);
 	Node *pNodeA=new Node('A');	
-	Node *pNodeA=new Node('B');
-	Node *pNodeA=new Node('C');
-	Node *pNodeA=new Node('D');
-	Node *pNodeA=new Node('E');
-	Node *pNodeA=new Node('F');
-	Node *pNodeA=new Node('G');
-	Node *pNodeA=new Node('H');
+	Node *pNodeB=new Node('B');
+	Node *pNodeC=new Node('C');
+	Node *pNodeD=new Node('D');
+	Node *pNodeE=new Node('E');
+	Node *pNodeF=new Node('F');
+	Node *pNodeG=new Node('G');
+	Node *pNodeH=new Node('H');
 	pMap->addNode(pNodeA);
 	pMap->addNode(pNodeB);
 	pMap->addNode(pNodeC);
@@ -73,16 +75,16 @@ int main(void){
 	pMap->depthFirstTraverse(0);
 
 	pMap->resetNode();
-	pMap->breadthFirstTraverse(0);
-	*/
+	pMap->breadthFirstTraverse(0);*/
+	
 
 	CMap *pMap=new CMap(6);
 	Node *pNodeA=new Node('A');	
-	Node *pNodeA=new Node('B');
-	Node *pNodeA=new Node('C');
-	Node *pNodeA=new Node('D');
-	Node *pNodeA=new Node('E');
-	Node *pNodeA=new Node('F');
+	Node *pNodeB=new Node('B');
+	Node *pNodeC=new Node('C');
+	Node *pNodeD=new Node('D');
+	Node *pNodeE=new Node('E');
+	Node *pNodeF=new Node('F');
 
 	pMap->addNode(pNodeA);
 	pMap->addNode(pNodeB);
@@ -103,9 +105,9 @@ int main(void){
 	pMap->setValueToMatrixForUndirectedGragh(3,4,2);
 	pMap->setValueToMatrixForUndirectedGragh(4,5,9);
 	//primTree
-	//pMap->primTree(0);
+	pMap->primTree(0);
 	//kruskalTree
-	pMap->kruskalTree();
+	//pMap->kruskalTree();
 	cout<<endl;
 
 

@@ -4,7 +4,7 @@
 using namespace std;
 CMap::CMap(int capacity){
 	m_iCapacity=capacity;
-	m_iNodecount=0;
+	m_iNodeCount=0;
 	m_pNodeArray=new Node[m_iCapacity];
 	m_pMatrix=new int[m_iCapacity *m_iCapacity];
 	memset(m_pMatrix,0,m_iCapacity *m_iCapacity *sizeof(int));
@@ -35,7 +35,7 @@ void CMap::resetNode(){
 	} 
 	
 }
-bool CMap::setValueToMatrixForDirectedGraph(int row,inr col,int val=1){
+bool CMap::setValueToMatrixForDirectedGraph(int row,int col,int val){
 	if(row<0||row>m_iCapacity){
 		return false;
 	}
@@ -45,7 +45,7 @@ bool CMap::setValueToMatrixForDirectedGraph(int row,inr col,int val=1){
 	m_pMatrix[row *m_iCapacity+col]=val;
 	return true;
 }
-bool CMap::setValueToMatrixForDirectedGraph(int row,inr col,int val=1){
+bool CMap::setValueToMatrixForUndirectedGragh(int row,int col,int val){
 	if(row<0||row>m_iCapacity){
 		return false;
 	}
@@ -58,7 +58,7 @@ bool CMap::setValueToMatrixForDirectedGraph(int row,inr col,int val=1){
 }
 void CMap::printMatrix(){
 	for(int i=0;i<m_iCapacity;i++){
-		for(k-0;k<m_iCapacity;k++){
+		for(int k=0;k<m_iCapacity;k++){
 			cout<<m_pMatrix[i*m_iCapacity+k]<<" ";
 		}
 		cout<<endl;
@@ -100,7 +100,7 @@ void CMap::breadthFirstTraverse(int nodeIndex){
 	m_pNodeArray[nodeIndex].m_bIsVisited=true;
 	vector<int> curVec;
 	curVec.push_back(nodeIndex);
-	breadthFirstTraverseImpl(vurVec);
+	breadthFirstTraverseImpl(curVec);
 }
 void CMap::breadthFirstTraverseImpl(vector<int> preVec){
 	int value=0;
@@ -162,7 +162,7 @@ void CMap::primTree(int nodeIndex){
 		int edgeIndex=getMinEdge(edgeVec);
 		edgeVec[edgeIndex].m_bSelected=true;
 
-		cout<<edgeVec[edgeIndex].m_iNodeIndexA<<"————"<<edgeVec[edgeIndex].m_iNodeIndexB<<" ";
+		cout<<edgeVec[edgeIndex].m_iNodeIndexA<<"----"<<edgeVec[edgeIndex].m_iNodeIndexB<<" ";
 		cout<<edgeVec[edgeIndex].m_iWeightValue<<endl;
 
 		m_pEdge[edgeCount]=edgeVec[edgeIndex];
@@ -227,7 +227,7 @@ void CMap::kruskalTree(){
 	while(edgeCount<m_iCapacity-1){
 		//2.从边集合找最小边
 		int minEdgeIndex=getMinEdge(edgeVec);
-		edgeVec[minEdgeIndex].m_bIsVisited=true;
+		edgeVec[minEdgeIndex].m_bSelected=true;
 		//3.找最小边连接的点
 		int nodeAIndex=edgeVec[minEdgeIndex].m_iNodeIndexA;
 		int nodeBIndex=edgeVec[minEdgeIndex].m_iNodeIndexB;
@@ -241,14 +241,14 @@ void CMap::kruskalTree(){
 		//4.找点所在的点集合
 		for(int i=0;i<(int)nodeSets.size();i++)
 		{
-			nodeAIsInset=isInset(nodeSets[i].nodeAIndex);
+			nodeAIsInset=isInset(nodeSets[i],nodeAIndex);
 			if(nodeAIsInset){
 				nodeAInsetLabel=i;
 			}
 		}
 		for(int i=0;i<(int)nodeSets.size();i++)
 		{
-			nodeBIsInset=isInset(nodeSets[i].nodeBIndex);
+			nodeBIsInset=isInset(nodeSets[i],nodeBIndex);
 			if(nodeBIsInset){
 				nodeBInsetLabel=i;
 			}
@@ -272,7 +272,7 @@ void CMap::kruskalTree(){
 		else if(nodeBInsetLabel!=-1&&nodeAInsetLabel!=-1&&nodeAInsetLabel!=nodeBInsetLabel)
 		{
 			mergeNodeSet(nodeSets[nodeAInsetLabel],nodeSets[nodeBInsetLabel]);
-			for(int k=nodeBInsetLabel；k<(int)nodeSets.size()-1;k++){
+			for(int k=nodeBInsetLabel;k<(int)nodeSets.size()-1;k++){
 				nodeSets[k]=nodeSets[k+1];
 			}
 		}

@@ -1,9 +1,10 @@
 #ifndef CMAP_H
 #define CMAP_H
 #include <vector>
-using namespace std;
 #include "Node.h"
 #include "Edge.h"
+using namespace std;
+
 
 class CMap{
 public:
@@ -17,7 +18,7 @@ public:
 	void printMatrix();
 
 	void depthFirstTraverse(int nodeIndex);//深度优先
-	void breadFirstTraverse(int nodeIndex);//广度优先
+	void breadthFirstTraverse(int nodeIndex);//广度优先
 
 	void primTree(int nodeIndex);//普里姆生成树
 	void kruskalTree();//克鲁斯卡尔生成树
@@ -35,5 +36,5 @@ private:
 	int *m_pMatrix;//邻接矩阵
 
 	Edge *m_pEdge;
-}
+};
 #endif

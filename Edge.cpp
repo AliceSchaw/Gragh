@@ -3,5 +3,5 @@ Edge::Edge(int nodeIndexA,int nodeIndexB,int weightValue){
 	m_iNodeIndexA=nodeIndexA;
 	m_iNodeIndexB=nodeIndexB;
 	m_iWeightValue=weightValue;
-	m_m_bSelected=false;
+	m_bSelected=false;
 }
